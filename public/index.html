@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cars24 Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase SDK for FCM -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <!-- 1. Maintenance Estimator -->
+    <section>
+      <h2>Maintenance Cost Estimator</h2>
+      <input id="age" placeholder="Car Age (years)" type="number" />
+      <input id="km" placeholder="KM Driven" type="number" />
+      <select id="brand">
+        <option>Toyota</option>
+        <option>Honda</option>
+        <option>Ford</option>
+      </select>
+      <button onclick="estimate()">Estimate</button>
+      <div id="estimateResult" class="result"></div>
+    </section>
+
+    <!-- 2. Notifications -->
+    <section>
+      <h2>Push Notifications</h2>
+      <label><input type="checkbox" id="bids" checked> Bid Updates</label><br>
+      <label><input type="checkbox" id="prices" checked> Price Drops</label><br>
+      <button onclick="requestPermission()">Enable Notifications</button>
+      <button onclick="testNotification()">Test Alert</button>
+    </section>
+
+    <!-- 3. Pricing Engine -->
+    <section>
+      <h2>Pricing Engine</h2>
+      <input id="basePrice" placeholder="Base Price ($)" type="number" value="10000"/>
+      <select id="carType"><option>SUV</option><option>hatchback</option></select>
+      <input id="region" placeholder="Region" value="metro"/>
+      <input id="season" placeholder="Season" value="monsoon"/>
+      <button onclick="adjustPrice()">Adjust Price</button>
+      <div id="priceResult" class="result"></div>
+    </section>
+
+    <!-- 4. Search -->
+    <section>
+      <h2>Search Cars</h2>
+      <input id="searchInput" placeholder="Search model..." list="suggestions" oninput="autoSuggest()" />
+      <datalist id="suggestions"></datalist>
+      <select id="fuel"><option>All</option><option>Petrol</option><option>Diesel</option></select>
+      <input id="mileageMin" placeholder="Min Mileage" type="number"/>
+      <input id="yearMin" placeholder="Min Year" type="number"/>
+      <select id="trans"><option>All</option><option>Auto</option><option>Manual</option></select>
+      <button onclick="searchCars()">Search</button>
+      <div id="searchResults" class="result"></div>
+    </section>
+
+    <!-- 5. Geo-Fencing -->
+    <section>
+      <h2>Geo-Fencing</h2>
+      <button onclick="getLocation()">Use My Location</button>
+      <div id="geoResult" class="result"></div>
+      <div id="map" style="height:200px; margin-top:10px; display:none;"></div>
+    </section>
+
+    <!-- 6. Referral -->
+    <section>
+      <h2>Referral System</h2>
+      <input id="email" placeholder="Your Email" />
+      <input id="refCode" placeholder="Referral Code (optional)" />
+      <button onclick="generateReferral()">Join / Generate Code</button>
+      <p id="myCode"></p>
+      <input id="redeemAmt" placeholder="Redeem Points" type="number" />
+      <button onclick="redeem()">Redeem</button>
+      <div id="wallet" class="result"></div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Firebase Config (replace with your config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      authDomain: "cars24-clone-fcm.firebaseapp.com",
+      projectId: "cars24-clone-fcm",
+      storageBucket: "cars24-clone-fcm.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "1:1234567890:web:abcdef123456"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+  </script>
+</body>
+</html>
